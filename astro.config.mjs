@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://xufenglei2020.github.io',
   base: '/zaichang',
-  trailingSlash: 'never',
+  trailingSlash: 'always',
   markdown: {
     gfm: true,
     smartypants: true,
