@@ -495,29 +495,11 @@ img {
   border-top: 1px solid var(--rule);
 }
 
-.about-cities-lead {
-  margin: 0 0 0.7em;
+.about-stanza {
+  margin: 2.2em 0 0;
 }
 
-.about-cities {
-  margin: 0 0 1.35em;
-  line-height: 2;
-}
-
-.about-dedicate {
-  margin-top: 2.2em;
-}
-
-.about-close {
-  margin-top: 2.4rem;
-}
-
-.about-close p {
-  margin: 0 0 0.35em;
-}
-
-.about-close p:last-child,
-.about p:last-child {
+.about-project .about-stanza {
   margin-bottom: 0;
 }
 
