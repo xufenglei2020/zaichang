@@ -15,6 +15,19 @@ import { site } from '../site.config';
     <section class="about-project">
       <h2>{site.project.title}</h2>
       {site.project.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      <p class="about-cities-lead">{site.project.citiesLead}</p>
+      <p class="about-cities">
+        {site.project.cities.map((line, i) => (
+          <>
+            {i > 0 && <br />}
+            {line}
+          </>
+        ))}
+      </p>
+      <p>{site.project.citiesNote}</p>
+      {site.project.after.map((paragraph) => (
+        <p class={paragraph.startsWith('这些文字') ? 'about-dedicate' : undefined}>{paragraph}</p>
+      ))}
       <div class="about-close">
         {site.project.close.map((line) => <p>{line}</p>)}
       </div>
