@@ -1,0 +1,61 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { site } from '../../site.config';
+import {
+  getVisibleEntries,
+  entryParams,
+  formatDate,
+  isPublished,
+} from '../../lib/journal';
+import type { JournalEntry } from '../../lib/journal';
+
+export async function getStaticPaths() {
+  const entries = await getVisibleEntries();
+  return entries.map((entry) => {
+    const params = entryParams(entry, entries);
+    return {
+      params,
+      props: { entry },
+    };
+  });
+}
+
+interface Props {
+  entry: JournalEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const description = entry.data.excerpt ?? `${entry.data.city}，${formatDate(entry.data.date)}。`;
+const pageTitle = `${entry.data.title}`;
+const showDraft = import.meta.env.DEV && !isPublished(entry);
+---
+
+<Base title={pageTitle} description={description} ogTitle={`${entry.data.city} · ${entry.data.title}`}>
+  <article class="essay">
+    {showDraft && <p class="draft-mark">{site.draftLabel}</p>}
+    <p class="essay-kicker">
+      {entry.data.city}
+      <span class="country"> · {entry.data.country}</span>
+    </p>
+    <p class="essay-date">
+      <time datetime={entry.data.date.toISOString().slice(0, 10)}>
+        {formatDate(entry.data.date)}
+      </time>
+    </p>
+    {entry.data.trip && <p class="essay-trip">{entry.data.trip}</p>}
+    {entry.data.carrying && <p class="essay-carrying">{entry.data.carrying}</p>}
+    <h1>{entry.data.title}</h1>
+    {
+      entry.data.cover && (
+        <figure class="essay-cover">
+          <img src={entry.data.cover} alt={entry.data.city} />
+        </figure>
+      )
+    }
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>

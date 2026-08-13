@@ -1,0 +1,427 @@
+:root {
+  --paper: #f6f1e8;
+  --ink: #1c1916;
+  --ink-soft: #5c564e;
+  --ink-faint: #8a8378;
+  --rust: #8c4a32;
+  --rust-wash: #ead4c6;
+  --rule: #ddd4c6;
+  --measure: 38rem;
+  --page: 42rem;
+  --font-serif: "Source Serif 4", "Noto Serif SC", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  --font-sans: "IBM Plex Sans", "Noto Sans SC", "Helvetica Neue", Helvetica, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.9;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--rust-wash);
+  color: var(--ink);
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: var(--rule);
+}
+
+a:hover {
+  color: var(--rust);
+  text-decoration-color: var(--rust);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  background: var(--paper);
+  padding: 0.25rem 0.5rem;
+  z-index: 10;
+}
+
+.wrap {
+  width: min(var(--page), calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.site-header {
+  padding: 1.35rem 0 1.1rem;
+}
+
+.header-inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.wordmark {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  letter-spacing: 0.28em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.wordmark:hover {
+  color: var(--rust);
+}
+
+.nav {
+  display: flex;
+  gap: 1.35rem;
+  margin-left: auto;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  font-weight: 400;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+
+.nav a:hover,
+.nav a[aria-current="page"] {
+  color: var(--rust);
+}
+
+.site-main {
+  flex: 1;
+  padding: 1.25rem 0 4.5rem;
+}
+
+.site-footer {
+  padding: 0 0 2.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
+.masthead {
+  padding: 3.25rem 0 3.75rem;
+}
+
+.masthead h1 {
+  margin: 0;
+  font-size: clamp(1.85rem, 4.5vw, 2.35rem);
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  line-height: 1.2;
+}
+
+.masthead .subtitle {
+  margin: 0.9rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+
+.empty {
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.year-block + .year-block {
+  margin-top: 3.25rem;
+}
+
+.year-label {
+  margin: 0 0 1.15rem;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--rust);
+  font-weight: 400;
+}
+
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry-list > li + li {
+  margin-top: 1.85rem;
+}
+
+.entry {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.entry:hover {
+  color: inherit;
+}
+
+.entry-meta {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: baseline;
+}
+
+.entry-meta time {
+  color: var(--rust);
+  font-variant-numeric: tabular-nums;
+}
+
+.entry-meta .sep {
+  color: var(--rule);
+}
+
+.entry h2 {
+  margin: 0.28rem 0 0;
+  font-size: 1.12rem;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+}
+
+.entry:hover h2 {
+  color: var(--rust);
+}
+
+.excerpt {
+  margin: 0.35rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.essay {
+  max-width: var(--measure);
+}
+
+.essay-kicker {
+  margin: 0.4rem 0 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.essay-kicker .country {
+  color: var(--ink-soft);
+}
+
+.essay-date {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--rust);
+}
+
+.essay-trip {
+  margin: 0.4rem 0 0;
+  color: var(--ink-faint);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.essay-carrying {
+  margin: 2.1rem 0 0;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.essay h1 {
+  margin: 1.75rem 0 0;
+  font-size: clamp(1.4rem, 3.4vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.essay-cover {
+  margin: 1.75rem 0 0;
+}
+
+.essay-cover img {
+  width: 100%;
+}
+
+.draft-mark {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+}
+
+.prose {
+  margin-top: 2.35rem;
+}
+
+.prose > *:first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  margin: 0 0 1.35em;
+}
+
+.prose h2,
+.prose h3 {
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 2.1em 0 0.7em;
+}
+
+.prose h2 {
+  font-size: 1.15rem;
+}
+
+.prose h3 {
+  font-size: 1.05rem;
+}
+
+.prose blockquote {
+  margin: 1.6em 0;
+  padding: 0 0 0 1rem;
+  border-left: 1px solid var(--rust);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.prose blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 1.35em;
+  padding-left: 1.2em;
+}
+
+.prose li + li {
+  margin-top: 0.25em;
+}
+
+.prose hr {
+  border: 0;
+  height: 1px;
+  background: var(--rule);
+  margin: 2.4em auto;
+  width: 4rem;
+}
+
+.prose a {
+  text-decoration-color: var(--rust);
+}
+
+.prose code {
+  font-family: var(--font-sans);
+  font-size: 0.88em;
+  background: #efe8dc;
+  padding: 0.08em 0.28em;
+}
+
+.prose pre {
+  overflow: auto;
+  padding: 1rem 1.1rem;
+  background: #efe8dc;
+  margin: 0 0 1.35em;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.prose img {
+  margin: 1.6em 0;
+}
+
+.about {
+  max-width: var(--measure);
+  padding-top: 2.5rem;
+}
+
+.about h1 {
+  margin: 0 0 1.8rem;
+  font-size: 1.65rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+}
+
+.about p {
+  margin: 0 0 1.35em;
+}
+
+.about p:last-child {
+  margin-bottom: 0;
+}
+
+.not-found {
+  padding-top: 4rem;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    width: min(var(--page), calc(100% - 2rem));
+  }
+
+  body {
+    font-size: 1.05rem;
+    line-height: 1.92;
+  }
+
+  .masthead {
+    padding: 2.4rem 0 2.8rem;
+  }
+
+  .site-main {
+    padding-bottom: 3.5rem;
+  }
+}

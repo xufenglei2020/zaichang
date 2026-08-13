@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site.config';
+import { getPublishedEntries, groupByYear, entryHref, formatDateShort } from '../lib/journal';
+
+const entries = await getPublishedEntries();
+const years = groupByYear(entries);
+---
+
+<Base>
+  <header class="masthead">
+    <h1>{site.title}</h1>
+    <p class="subtitle">{site.subtitle}</p>
+  </header>
+
+  {
+    entries.length === 0 ? (
+      <p class="empty">{site.empty}</p>
+    ) : (
+      years.map(({ year, entries: yearEntries }) => (
+        <section class="year-block" aria-labelledby={`y-${year}`}>
+          <h2 class="year-label" id={`y-${year}`}>{year}</h2>
+          <ol class="entry-list">
+            {yearEntries.map((entry) => (
+              <li>
+                <a class="entry" href={entryHref(entry, entries)}>
+                  <div class="entry-meta">
+                    <time datetime={entry.data.date.toISOString().slice(0, 10)}>
+                      {formatDateShort(entry.data.date)}
+                    </time>
+                    <span class="sep" aria-hidden="true">·</span>
+                    <span>{entry.data.city}</span>
+                  </div>
+                  <h2>{entry.data.title}</h2>
+                  {entry.data.excerpt && <p class="excerpt">{entry.data.excerpt}</p>}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))
+    )
+  }
+</Base>

@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site.config';
+---
+
+<Base title={site.navAbout} description={site.description}>
+  <article class="about">
+    <h1>{site.title}</h1>
+    <p>因为工作，我会在全球的城市之间移动。每到一处，我抽出一天，去走、去看、去感受。</p>
+    <p>这些文字不是攻略，也不是炫耀。它们是那一天真正看见的东西，以及当时的我带着什么走进这座城市。</p>
+    <p>全文只活在这里。朋友圈、小红书、X 上出现的，都只是从这里摘出的一小截。</p>
+  </article>
+</Base>
