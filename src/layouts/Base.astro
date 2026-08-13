@@ -40,7 +40,7 @@ const path = rawPath === base || rawPath === '' ? '/' : rawPath.slice(base.lengt
     />
   </head>
   <body>
-    <a class="skip" href="#content">跳到正文</a>
+    <a class="skip" href="#content">{site.skipToContent}</a>
     <header class="site-header">
       <div class="wrap header-inner">
         {
@@ -52,6 +52,7 @@ const path = rawPath === base || rawPath === '' ? '/' : rawPath.slice(base.lengt
         }
         <nav class="nav" aria-label="栏目">
           <a href={withBase('/')} aria-current={path === '/' ? 'page' : undefined}>{site.navIndex}</a>
+          <a href={withBase('/themes')} aria-current={path === '/themes' ? 'page' : undefined}>{site.navThemes}</a>
           <a href={withBase('/about')} aria-current={path === '/about' ? 'page' : undefined}>{site.navAbout}</a>
         </nav>
       </div>

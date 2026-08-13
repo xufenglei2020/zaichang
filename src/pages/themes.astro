@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryRow from '../components/EntryRow.astro';
+import { site } from '../site.config';
+import { getPublishedEntries } from '../lib/journal';
+
+const entries = await getPublishedEntries();
+const groups = site.themes.map((theme) => ({
+  theme,
+  entries: entries.filter((entry) => entry.data.themes?.includes(theme)),
+}));
+---
+
+<Base title={site.navThemes} description={site.description}>
+  <header class="masthead masthead-compact">
+    <h1>{site.navThemes}</h1>
+  </header>
+
+  {
+    groups.map(({ theme, entries: themeEntries }) => (
+      <section class="theme-block" aria-labelledby={`t-${theme}`}>
+        <h2 class="year-label" id={`t-${theme}`}>{theme}</h2>
+        {themeEntries.length > 0 && (
+          <ol class="entry-list">
+            {themeEntries.map((entry) => (
+              <li>
+                <EntryRow entry={entry} all={entries} />
+              </li>
+            ))}
+          </ol>
+        )}
+      </section>
+    ))
+  }
+</Base>

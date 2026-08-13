@@ -1,27 +1,28 @@
-# 在场
+# 行走与观照
 
-出差里抽出的一天。城市观察的生命记录，不是旅行博客。
+一个全球旅行者的城市、文明与生命笔记。
 
-全文只活在这里。朋友圈、小红书、X 上出现的，都只是从这里摘出的一小截。
+全文只活在这里。朋友圈、小红书、X 上的，都只是从这里摘出的一小截。
+
+站点名称、导航、关于页正文和主题列表都写在 src/site.config.ts。
 
 ## 记录系统
 
-唯一的正文来源是 Markdown：
-
-src/content/journal/YYYY-MM-DD-city-slug.md
+唯一的正文来源是 Markdown：src/content/journal/YYYY-MM-DD-city-slug.md
 
 不要在别的地方另写一版再拷过来。先写全文，再摘短的。
 
 ## 新增一篇
 
 1. 复制 templates/entry.md 到 src/content/journal/
-2. 按约定命名，例如 2026-08-12-kyoto.md
-   - 日期是观察日
-   - city-slug 用拉丁字母（拼音或英文）
+2. 按约定命名，例如 2026-08-12-kyoto.md（日期是观察日；city-slug 用拉丁字母）
 3. 填 frontmatter，写正文
-4. 写完后把 status 改成 published
+4. 可选：在 themes 里填站点主题页上的名称（见 src/site.config.ts）
+5. 写完后把 status 改成 published
 
-未发布的 draft 不会出现在首页和 RSS；正式构建里访问草稿地址会 404。本地开发服务器可以打开草稿预览。
+未发布的 draft 不会出现在目录、主题页和 RSS；正式构建里访问草稿地址会 404。本地开发服务器可以打开草稿预览。
+
+封面图放在 public/images/，frontmatter 里写成 /images/….jpg。不要提交图库或占位照片。
 
 ## 文件名与网址
 
@@ -29,17 +30,15 @@ src/content/journal/2026-08-12-kyoto.md 对应网址 /2026/kyoto
 
 同一座城市同一年走两次时，后一篇会变成 /2026/kyoto-11-03，以免撞车。
 
+GitHub Pages 项目站的 base 是 /zaichang。内部链接一律走 src/lib/paths.ts 的 withBase()。
+
 ## 命令
 
-npm install
-npm run dev      # 本地预览，默认 http://localhost:4321
-npm run build    # 生成静态站点到 dist/
-npm run preview  # 预览构建结果
+install 依赖；dev 本地预览；build 生成 dist/；preview 预览构建；pages 构建并复制到 docs/ 供 GitHub Pages 发布。
+public/.nojekyll 会随构建进入 docs/，避免 Jekyll 吃掉下划线目录。
 
-## 改名
+## 留言（Giscus）
 
-工作标题「在场」可以只改一处：src/site.config.ts。页面上的名称、页脚、RSS 都从这里读。
-
-## 部署前
-
-把 astro.config.mjs 里的 site 占位域名换成真实域名。
+文章页底部用 Giscus 把 GitHub Discussions 当作留言，按 pathname 映射，语言 zh-CN。配置见 src/site.config.ts 的 giscus 字段。
+仓库 Discussions 尚未打开，分类 ID 因此还空着。留言要真正出现，需要：打开仓库 Discussions；在 giscus.app 安装应用并授权 xufenglei2020/zaichang；选 General 或自建 Comments 分类；把 Category ID 填进 site.config.ts 的 giscus.categoryId（repoId 已写入 R_kgDOT27uIw）；再构建 docs/。
+未完成这些步骤时，留言区可能空白或报错。

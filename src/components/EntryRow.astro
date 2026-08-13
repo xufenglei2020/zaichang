@@ -1,0 +1,38 @@
+---
+import { entryHref, formatDateShort, type JournalEntry } from '../lib/journal';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  entry: JournalEntry;
+  all: JournalEntry[];
+}
+
+const { entry, all } = Astro.props;
+const href = entryHref(entry, all);
+const cover = entry.data.cover ? withBase(entry.data.cover) : undefined;
+---
+
+<a class="entry" href={href}>
+  {
+    cover && (
+      <img
+        class="entry-thumb"
+        src={cover}
+        alt=""
+        width="240"
+        height="160"
+      />
+    )
+  }
+  <div class="entry-body">
+    <div class="entry-meta">
+      <time datetime={entry.data.date.toISOString().slice(0, 10)}>
+        {formatDateShort(entry.data.date)}
+      </time>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>{entry.data.city}</span>
+    </div>
+    <h2>{entry.data.title}</h2>
+    {entry.data.excerpt && <p class="excerpt">{entry.data.excerpt}</p>}
+  </div>
+</a>

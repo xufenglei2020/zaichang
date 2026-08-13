@@ -30,6 +30,10 @@ status: draft
 
 # 可选。放在 public/images/ 下，路径以 /images/ 开头。
 # cover: /images/2026-kyoto.jpg
+
+# 可选。须与 src/site.config.ts 里的主题名称一致。
+# themes:
+#   - 自由与秩序
 ---
 
 正文从这里开始。给十年后的自己读。
