@@ -1,7 +1,6 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Comments from '../../components/Comments.astro';
 import { site } from '../../site.config';
 import { withBase } from '../../lib/paths';
 import {
@@ -33,12 +32,12 @@ const description = entry.data.excerpt ?? `${entry.data.city}，${formatDate(ent
 const pageTitle = `${entry.data.title}`;
 const showDraft = import.meta.env.DEV && !isPublished(entry);
 const cover = entry.data.cover ? withBase(entry.data.cover) : undefined;
+const ogImage = cover ? new URL(cover, Astro.site).href : undefined;
 ---
 
-<Base title={pageTitle} description={description} ogTitle={`${entry.data.city} · ${entry.data.title}`}>
+<Base title={pageTitle} description={description} ogTitle={`${entry.data.city} · ${entry.data.title}`} ogImage={ogImage}>
   <article class="essay">
     {showDraft && <p class="draft-mark">{site.draftLabel}</p>}
-    {entry.data.carrying && <p class="essay-carrying">{entry.data.carrying}</p>}
     <p class="essay-kicker">
       {entry.data.city}
       <span class="country"> · {entry.data.country}</span>
@@ -54,12 +53,12 @@ const cover = entry.data.cover ? withBase(entry.data.cover) : undefined;
       cover && (
         <figure class="essay-cover">
           <img src={cover} alt={entry.data.city} />
+          {entry.data.coverCaption && <figcaption>{entry.data.coverCaption}</figcaption>}
         </figure>
       )
     }
     <div class="prose">
       <Content />
     </div>
-    <Comments />
   </article>
 </Base>

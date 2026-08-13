@@ -18,6 +18,7 @@ const journal = defineCollection({
     excerpt: z.string().optional(),
     status: z.enum(['draft', 'published']).default('draft'),
     cover: z.string().optional(),
+    coverCaption: z.string().optional(),
     themes: z.array(z.string()).optional(),
   }),
 });

@@ -16,23 +16,19 @@ const cover = entry.data.cover ? withBase(entry.data.cover) : undefined;
   {
     cover && (
       <img
-        class="entry-thumb"
+        class="entry-still"
         src={cover}
         alt=""
-        width="240"
-        height="160"
       />
     )
   }
   <div class="entry-body">
-    <div class="entry-meta">
+    <h2 class="entry-city">{entry.data.city}</h2>
+    {entry.data.excerpt && <p class="excerpt">{entry.data.excerpt}</p>}
+    <p class="entry-date">
       <time datetime={entry.data.date.toISOString().slice(0, 10)}>
         {formatDateShort(entry.data.date)}
       </time>
-      <span class="sep" aria-hidden="true">·</span>
-      <span>{entry.data.city}</span>
-    </div>
-    <h2>{entry.data.title}</h2>
-    {entry.data.excerpt && <p class="excerpt">{entry.data.excerpt}</p>}
+    </p>
   </div>
 </a>

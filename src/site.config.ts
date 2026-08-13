@@ -10,7 +10,6 @@ export const site = {
   empty: '还没有写下第一座城市。',
   notFound: '没有这一页',
   draftLabel: '草稿',
-  commentsHeading: '留言',
   skipToContent: '跳到正文',
   about: {
     kicker: '创刊词',
@@ -53,15 +52,6 @@ export const site = {
     '教育与下一代',
     '内在自由',
   ],
-  giscus: {
-    repo: 'xufenglei2020/zaichang',
-    repoId: 'R_kgDOT27uIw',
-    category: 'General',
-    categoryId: '',
-    mapping: 'pathname',
-    lang: 'zh-CN',
-    theme: 'noborder_light',
-  },
 } as const;
 
 export type SiteTheme = (typeof site.themes)[number];
