@@ -461,17 +461,35 @@ img {
   padding-top: 2.25rem;
 }
 
+.about-kicker {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--cinnabar);
+}
+
 .about h1 {
-  margin: 0 0 1.8rem;
-  font-size: 1.55rem;
+  margin: 0 0 2rem;
+  font-size: clamp(1.4rem, 3.4vw, 1.75rem);
   font-weight: 500;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
 }
 
 .about p {
   margin: 0 0 1.35em;
 }
 
+.about-close {
+  margin-top: 2.4rem;
+}
+
+.about-close p {
+  margin: 0 0 0.35em;
+}
+
+.about-close p:last-child,
 .about p:last-child {
   margin-bottom: 0;
 }

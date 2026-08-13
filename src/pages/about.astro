@@ -3,9 +3,13 @@ import Base from '../layouts/Base.astro';
 import { site } from '../site.config';
 ---
 
-<Base title={site.navAbout} description={site.description}>
+<Base title={site.about.title} description={site.description}>
   <article class="about">
-    <h1>{site.title}</h1>
-    {site.about.map((paragraph) => <p>{paragraph}</p>)}
+    <p class="about-kicker">{site.about.kicker}</p>
+    <h1>{site.about.title}</h1>
+    {site.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    <div class="about-close">
+      {site.about.close.map((line) => <p>{line}</p>)}
+    </div>
   </article>
 </Base>
