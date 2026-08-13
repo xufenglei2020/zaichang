@@ -37,8 +37,4 @@ GitHub Pages 项目站的 base 是 /zaichang。内部链接一律走 src/lib/pat
 install 依赖；dev 本地预览；build 生成 dist/；preview 预览构建；pages 构建并复制到 docs/ 供 GitHub Pages 发布。
 public/.nojekyll 会随构建进入 docs/，避免 Jekyll 吃掉下划线目录。
 
-## 留言（Giscus）
 
-文章页底部用 Giscus 把 GitHub Discussions 当作留言，按 pathname 映射，语言 zh-CN。配置见 src/site.config.ts 的 giscus 字段。
-仓库 Discussions 尚未打开，分类 ID 因此还空着。留言要真正出现，需要：打开仓库 Discussions；在 giscus.app 安装应用并授权 xufenglei2020/zaichang；选 General 或自建 Comments 分类；把 Category ID 填进 site.config.ts 的 giscus.categoryId（repoId 已写入 R_kgDOT27uIw）；再构建 docs/。
-未完成这些步骤时，留言区可能空白或报错。

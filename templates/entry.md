@@ -18,8 +18,7 @@ date: 2026-08-12
 # 可选。这一趟出差为什么存在。一句就够，会出现在日期下面。
 trip: 
 
-# 可选。带着什么走进这座城市：一个问题、一种心情、身体的某个状态。
-# 会出现在标题前，斜体，不另加标签。
+# 可选。带着什么走进这座城市。只写在 frontmatter 里，正文页不展示。
 carrying: 
 
 # 可选。一两句，给目录页和 X。不是导语作文。
@@ -30,6 +29,7 @@ status: draft
 
 # 可选。放在 public/images/ 下，路径以 /images/ 开头。
 # cover: /images/2026-kyoto.jpg
+# coverCaption: 一句给封面图的说明。
 
 # 可选。须与 src/site.config.ts 里的主题名称一致。
 # themes:

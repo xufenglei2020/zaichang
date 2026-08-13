@@ -6,8 +6,7 @@
   --rule: #d4cfc4;
   --measure: 38rem;
   --page: 48rem;
-  --font-serif: "Source Serif 4", "Noto Serif SC", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
-  --font-sans: "IBM Plex Sans", "Noto Sans SC", "Helvetica Neue", Helvetica, sans-serif;
+  --font-serif: "Source Serif 4 Variable", "Source Serif 4", "Noto Serif SC", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
 }
 
 *,
@@ -26,6 +25,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 body {
@@ -112,8 +112,8 @@ img {
   display: flex;
   gap: 1.25rem;
   margin-left: auto;
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
   letter-spacing: 0.16em;
   font-weight: 400;
 }
@@ -135,8 +135,8 @@ img {
 
 .site-footer {
   padding: 0 0 2rem;
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   color: var(--ink-faint);
 }
@@ -153,13 +153,13 @@ img {
   margin: 0;
   font-size: clamp(1.7rem, 4vw, 2.15rem);
   font-weight: 500;
-  letter-spacing: 0.38em;
+  letter-spacing: 0.14em;
   line-height: 1.2;
 }
 
 .masthead-compact h1 {
   font-size: 1.35rem;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.14em;
 }
 
 .masthead .subtitle {
@@ -192,11 +192,10 @@ img {
   padding-bottom: 0.75rem;
 }
 
-
 .year-label {
-  margin: 0 0 0.2rem;
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
+  margin: 0 0 1rem;
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
   letter-spacing: 0.22em;
   color: var(--cinnabar);
   font-weight: 400;
@@ -209,18 +208,17 @@ img {
 }
 
 .entry-list > li {
-  border-top: 1px solid var(--rule);
+  border-top: none;
+  padding: 0 0 2.75rem;
 }
 
-.entry-list > li:first-child {
-  border-top: 1px solid var(--rule);
+.entry-list > li:last-child {
+  padding-bottom: 0;
 }
 
 .entry {
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-  padding: 0.55rem 0;
+  display: block;
+  padding: 0;
   text-decoration: none;
   color: inherit;
 }
@@ -229,68 +227,63 @@ img {
   color: inherit;
 }
 
-.entry-thumb {
-  width: 7.5rem;
-  height: 5rem;
-  flex-shrink: 0;
-  object-fit: cover;
+.entry-still {
+  width: 100%;
+  height: auto;
+  display: block;
   background: #e4dfd4;
 }
 
 .entry-body {
   min-width: 0;
-  flex: 1;
+  max-width: var(--measure);
 }
 
-.entry-meta {
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
-  color: var(--ink-faint);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  align-items: baseline;
-}
-
-.entry-meta time {
-  color: var(--cinnabar);
-  font-variant-numeric: tabular-nums;
-}
-
-.entry-meta .sep {
-  color: var(--rule);
-}
-
-.entry h2 {
-  margin: 0.12rem 0 0;
-  font-size: 1.02rem;
+.entry-city {
+  margin: 0.9rem 0 0;
+  font-size: 1.15rem;
   font-weight: 500;
   line-height: 1.4;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
 }
 
-.entry:hover h2 {
+.entry:hover .entry-city {
   color: var(--cinnabar);
 }
 
 .excerpt {
-  margin: 0.12rem 0 0;
+  margin: 0.35rem 0 0;
   color: var(--ink-faint);
-  font-size: 0.86rem;
-  line-height: 1.45;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.entry-date {
+  margin: 0.45rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+}
+
+.entry-date time {
+  font-variant-numeric: tabular-nums;
 }
 
 .essay {
-  max-width: var(--measure);
   padding-top: 2rem;
 }
 
+.essay-kicker,
+.essay-date,
+.essay-trip,
+.essay h1,
+.draft-mark,
+.prose > *:not(p:has(> img:only-child)) {
+  max-width: var(--measure);
+}
+
 .essay-kicker {
-  margin: 0.35rem 0 0;
+  margin: 0;
   font-size: 0.95rem;
   color: var(--ink);
 }
@@ -301,7 +294,6 @@ img {
 
 .essay-date {
   margin: 0.45rem 0 0;
-  font-family: var(--font-sans);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   color: var(--cinnabar);
@@ -314,14 +306,6 @@ img {
   line-height: 1.6;
 }
 
-.essay-carrying {
-  margin: 0;
-  font-style: italic;
-  color: var(--ink-faint);
-  font-size: 1rem;
-  line-height: 1.75;
-}
-
 .essay h1 {
   margin: 1.6rem 0 0;
   font-size: clamp(1.4rem, 3.4vw, 1.75rem);
@@ -331,16 +315,38 @@ img {
 }
 
 .essay-cover {
-  margin: 1.6rem 0 0;
+  margin: 1.8rem 0 0;
+}
+
+.essay-cover img,
+.prose p:has(> img:only-child) {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 .essay-cover img {
-  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.essay-cover figcaption,
+.prose p:has(> em:only-child) {
+  max-width: var(--measure);
+  margin-top: 0.55rem;
+  font-style: italic;
+  color: var(--ink-faint);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.prose p:has(> em:only-child) {
+  margin-bottom: 1.8em;
 }
 
 .draft-mark {
   margin: 0 0 0.8rem;
-  font-family: var(--font-sans);
   font-size: 0.68rem;
   letter-spacing: 0.18em;
   color: var(--ink-faint);
@@ -408,7 +414,7 @@ img {
 }
 
 .prose code {
-  font-family: var(--font-sans);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.88em;
   background: #e7e3d9;
   padding: 0.08em 0.28em;
@@ -426,34 +432,14 @@ img {
   padding: 0;
 }
 
-.prose img {
-  margin: 1.6em 0;
+.prose p:has(> img:only-child) {
+  margin: 1.8em 0 0;
 }
 
-.comments {
-  margin-top: 3.5rem;
-  padding-top: 1.6rem;
-  border-top: 1px solid var(--rule);
-}
-
-.comments h2 {
-  margin: 0 0 1.15rem;
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
-  letter-spacing: 0.22em;
-  font-weight: 400;
-  color: var(--ink-faint);
-}
-
-.giscus-wrap {
-  min-height: 4rem;
-}
-
-.giscus-wrap .giscus,
-.giscus-wrap .giscus-frame {
+.prose p:has(> img:only-child) img {
   width: 100%;
-  border: 0;
-  background: transparent;
+  max-width: none;
+  margin: 0;
 }
 
 .about {
@@ -463,7 +449,6 @@ img {
 
 .about-kicker {
   margin: 0 0 0.55rem;
-  font-family: var(--font-sans);
   font-size: 0.68rem;
   letter-spacing: 0.22em;
   color: var(--cinnabar);
@@ -489,18 +474,8 @@ img {
   line-height: 1.4;
 }
 
-.about-project {
-  margin-top: 3.6rem;
-  padding-top: 2.4rem;
-  border-top: 1px solid var(--rule);
-}
-
 .about-stanza {
   margin: 2.2em 0 0;
-}
-
-.about-project .about-stanza {
-  margin-bottom: 0;
 }
 
 .not-found {
@@ -530,17 +505,11 @@ img {
     gap: 0.9rem;
   }
 
-  .entry {
-    gap: 0.85rem;
-    padding: 0.55rem 0;
+  .entry-list > li {
+    padding-bottom: 2.15rem;
   }
 
-  .entry-thumb {
-    width: 5.75rem;
-    height: 4rem;
-  }
-
-  .entry h2 {
-    font-size: 0.98rem;
+  .entry-city {
+    font-size: 1.08rem;
   }
 }

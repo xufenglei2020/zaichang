@@ -1,20 +1,37 @@
 ---
+import '@fontsource-variable/source-serif-4/wght.css';
+import '@fontsource-variable/source-serif-4/wght-italic.css';
+import '@fontsource/noto-serif-sc/chinese-simplified-400.css';
+import '@fontsource/noto-serif-sc/chinese-simplified-500.css';
 import '../styles/global.css';
 import { site } from '../site.config';
 import { withBase } from '../lib/paths';
+import { getPublishedEntries } from '../lib/journal';
 
 interface Props {
   title?: string;
   description?: string;
   ogTitle?: string;
+  ogImage?: string;
 }
 
-const { title, description = site.description, ogTitle } = Astro.props;
+const { title, description = site.description, ogTitle, ogImage: ogImageProp } = Astro.props;
 const pageTitle = title ? `${title} · ${site.title}` : `${site.title} · ${site.subtitle}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 const rawPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const path = rawPath === base || rawPath === '' ? '/' : rawPath.slice(base.length) || '/';
+
+function toAbsolute(url: string): string {
+  return new URL(url, Astro.site).href;
+}
+
+let ogImage = ogImageProp;
+if (!ogImage) {
+  const published = await getPublishedEntries();
+  const fallback = published.find((entry) => entry.data.cover)?.data.cover;
+  if (fallback) ogImage = toAbsolute(withBase(fallback));
+}
 ---
 
 <!doctype html>
@@ -31,13 +48,10 @@ const path = rawPath === base || rawPath === '' ? '/' : rawPath.slice(base.lengt
     <meta property="og:title" content={ogTitle ?? pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
-      rel="stylesheet"
-    />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
   </head>
   <body>
     <a class="skip" href="#content">{site.skipToContent}</a>
@@ -52,7 +66,6 @@ const path = rawPath === base || rawPath === '' ? '/' : rawPath.slice(base.lengt
         }
         <nav class="nav" aria-label="栏目">
           <a href={withBase('/')} aria-current={path === '/' ? 'page' : undefined}>{site.navIndex}</a>
-          <a href={withBase('/themes')} aria-current={path === '/themes' ? 'page' : undefined}>{site.navThemes}</a>
           <a href={withBase('/about')} aria-current={path === '/about' ? 'page' : undefined}>{site.navAbout}</a>
         </nav>
       </div>
@@ -63,7 +76,7 @@ const path = rawPath === base || rawPath === '' ? '/' : rawPath.slice(base.lengt
       </div>
     </main>
     <footer class="site-footer">
-      <div class="wrap">© {site.author} · {site.title}</div>
+      <div class="wrap">{site.title}</div>
     </footer>
   </body>
 </html>
