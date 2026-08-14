@@ -1,5 +1,5 @@
 ---
-title: 华盛顿：约束权力
+title: 华盛顿：承诺如何反过来追问权力
 city: 华盛顿
 cityEn: Washington
 country: 美国
