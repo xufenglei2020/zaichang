@@ -1,5 +1,5 @@
 ---
-title: 华盛顿：一个共和国如何约束权力
+title: 华盛顿：约束权力
 city: 华盛顿
 cityEn: Washington
 country: 美国
